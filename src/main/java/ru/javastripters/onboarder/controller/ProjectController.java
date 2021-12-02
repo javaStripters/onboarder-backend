@@ -2,6 +2,7 @@ package ru.javastripters.onboarder.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.javastripters.onboarder.dto.MarkdownDTO;
 import ru.javastripters.onboarder.dto.ProjectCardDto;
 import ru.javastripters.onboarder.service.ProjectService;
 
@@ -31,5 +32,15 @@ public class ProjectController {
     @PutMapping()
     public ProjectCardDto updateProjectCard(@RequestBody ProjectCardDto dto) {
         return new ProjectCardDto(projectService.updateProjectCard(dto));
+    }
+
+    @GetMapping("{projectId}/goals")
+    public MarkdownDTO getProjectGoals(@PathVariable int projectId) {
+        return new MarkdownDTO(projectService.getGoals(projectId));
+    }
+
+    @PutMapping("{projectId}/goals")
+    public MarkdownDTO setProjectGoals(@PathVariable int projectId, @RequestBody MarkdownDTO dto) {
+        return new MarkdownDTO(projectService.setGoals(projectId, dto.getContent()));
     }
 }

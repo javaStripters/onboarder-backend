@@ -30,7 +30,12 @@ public class Project {
     List<String> tags = new ArrayList<>();
 
     @Column(columnDefinition = "text")
-    String goals;
+    @Builder.Default
+    String goals = """
+                   # Цели проекта\n\n
+                   # Задачи проекта\n\n
+                   # Описание проекта \n\n
+                   """;
 
     @Column(columnDefinition = "text")
     String instruments;

@@ -69,4 +69,21 @@ public class ProjectService {
         projectRepo.save(project);
         return project;
     }
+
+    public String getGoals(int projectId) {
+        Project project = projectRepo.findById(projectId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+
+        return project.getGoals();
+    }
+
+    public String setGoals(int projectId, String content) {
+        Project project = projectRepo.findById(projectId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+
+        project.setGoals(content);
+        projectRepo.save(project);
+
+        return project.getGoals();
+    }
 }
