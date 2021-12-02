@@ -37,7 +37,12 @@ public class Mocker implements CommandLineRunner {
                 .users(Set.of(m1, m2, dev))
                 .build();
 
-//        userRepo.saveAll(List.of(m1, m2, dev));
-        projectRepo.save(project);
+        Project project1 = Project.builder()
+                .name("Тоже крутой проект")
+                .description("Не такое длинное описание")
+                .users(Set.of(dev))
+                .build();
+
+        projectRepo.saveAll(List.of(project, project1));
     }
 }

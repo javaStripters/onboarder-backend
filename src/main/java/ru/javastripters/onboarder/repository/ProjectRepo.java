@@ -8,4 +8,5 @@ import ru.javastripters.onboarder.model.User;
 import java.util.List;
 
 public interface ProjectRepo extends CrudRepository<Project, Integer> {
+    List<Project> findAll();
 }
