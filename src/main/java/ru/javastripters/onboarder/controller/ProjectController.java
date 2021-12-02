@@ -1,11 +1,8 @@
 package ru.javastripters.onboarder.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import ru.javastripters.onboarder.dto.ProjectCardDto;
-import ru.javastripters.onboarder.model.Project;
 import ru.javastripters.onboarder.service.ProjectService;
 
 import java.util.List;
@@ -23,5 +20,16 @@ public class ProjectController {
     @GetMapping("user/{user_id}/")
     public List<ProjectCardDto> getProjects(@PathVariable("user_id") int userId) {
         return projectService.getAllProjects(userId).stream().map(ProjectCardDto::new).collect(Collectors.toList());
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProjectCardDto createProject(@RequestBody ProjectCardDto dto) {
+        return new ProjectCardDto(projectService.createProject(dto));
+    }
+
+    @PutMapping()
+    public ProjectCardDto updateProjectCard(@RequestBody ProjectCardDto dto) {
+        return new ProjectCardDto(projectService.updateProjectCard(dto));
     }
 }

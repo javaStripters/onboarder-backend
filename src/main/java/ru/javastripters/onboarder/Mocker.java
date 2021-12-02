@@ -34,7 +34,7 @@ public class Mocker implements CommandLineRunner {
         Project project = Project.builder()
                 .name("Крутой проект")
                 .description(" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida eget ipsum fermentum mollis. Donec eget erat est. Cras lacinia sit amet nisl id egestas. Curabitur dui purus, blandit eu leo eget, volutpat fringilla erat. Mauris nec ante elementum, consequat magna et, fermentum diam. Integer vestibulum mollis elit at dapibus. Curabitur efficitur arcu vitae velit bibendum placerat. ")
-                .users(Set.of(m1, m2, dev))
+                .users(List.of(m1, m2, dev))
                 .direction("Mobile")
                 .tags(List.of("Android", "Kotlin"))
                 .build();
@@ -42,7 +42,7 @@ public class Mocker implements CommandLineRunner {
         Project project1 = Project.builder()
                 .name("Тоже крутой проект")
                 .description("Не такое длинное описание")
-                .users(Set.of(dev))
+                .users(List.of(dev))
                 .direction("Web")
                 .tags(List.of("VueJS", "Java", "JS"))
                 .build();

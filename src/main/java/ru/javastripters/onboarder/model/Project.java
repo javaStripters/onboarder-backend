@@ -5,9 +5,7 @@ import org.checkerframework.checker.units.qual.C;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Builder
@@ -29,7 +27,7 @@ public class Project {
     String direction;
 
     @ElementCollection
-    List<String> tags;
+    List<String> tags = new ArrayList<>();
 
     @Column(columnDefinition = "text")
     String goals;
@@ -38,14 +36,22 @@ public class Project {
     String instruments;
 
     @ElementCollection
-    List<String> diagramPaths;
+    List<String> diagramPaths = new ArrayList<>();
+
+    @OneToMany
+    Set<Documents> documents = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable
     @ToString.Exclude
-    Set<User> users;
+    List<User> users = new ArrayList<>();
 
     protected Project() {}
+
+    public Project addUsers(Collection<User> users) {
+        this.users.addAll(users);
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {

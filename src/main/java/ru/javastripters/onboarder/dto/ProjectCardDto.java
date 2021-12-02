@@ -1,16 +1,21 @@
 package ru.javastripters.onboarder.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.javastripters.onboarder.model.Project;
 import ru.javastripters.onboarder.model.User;
 
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 public class ProjectCardDto {
     @Data
-    static class UserDTO {
+    @NoArgsConstructor
+    public static class UserDTO {
         int id;
         String fullname;
 
@@ -36,5 +41,15 @@ public class ProjectCardDto {
         tags = project.getTags();
 
         users = project.getUsers().stream().map(UserDTO::new).collect(Collectors.toList());
+    }
+
+    public Project toEntity() {
+        return Project.builder()
+                .name(name)
+                .description(description)
+                .direction(direction)
+                .tags(tags)
+                .users(new ArrayList<>())
+                .build();
     }
 }
