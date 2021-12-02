@@ -39,3 +39,5 @@ out/
 *.secrets
 .oci
 files
+
+onboarder.log
