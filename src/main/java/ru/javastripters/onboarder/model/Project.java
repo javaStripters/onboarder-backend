@@ -1,6 +1,7 @@
 package ru.javastripters.onboarder.model;
 
 import lombok.*;
+import org.checkerframework.checker.units.qual.C;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -23,6 +24,12 @@ public class Project {
 
     @Column(columnDefinition = "text")
     String description;
+
+    @Column(columnDefinition = "text")
+    String direction;
+
+    @ElementCollection
+    List<String> tags;
 
     @Column(columnDefinition = "text")
     String goals;

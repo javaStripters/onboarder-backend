@@ -23,8 +23,8 @@ public class ProjectCardDto {
     Integer id;
     String name;
     String description;
-    String direction = "Какое-то направление";
-    List<String> tags = List.of("VueJS", "Java", "Figma");
+    String direction;
+    List<String> tags;
 
     List<UserDTO> users;
 
@@ -32,6 +32,8 @@ public class ProjectCardDto {
         id = project.getId();
         name = project.getName();
         description = project.getDescription();
+        direction = project.getDirection();
+        tags = project.getTags();
 
         users = project.getUsers().stream().map(UserDTO::new).collect(Collectors.toList());
     }
