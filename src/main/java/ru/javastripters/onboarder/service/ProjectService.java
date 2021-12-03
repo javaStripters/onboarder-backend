@@ -24,7 +24,7 @@ public class ProjectService {
     }
 
     public List<Project> getAllProjects(int userId) {
-        return projectRepo.findAll();
+        return projectRepo.findAllByUsersContains(userRepo.findUsersById(userId));
     }
 
     public Project createProject(ProjectCardDto dto) {

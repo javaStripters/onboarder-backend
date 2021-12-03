@@ -49,10 +49,12 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
             @Builder.Default
             @JsonManagedReference
+    @ToString.Exclude
     List<Diagram> diagrams = new ArrayList<>();
 
     @OneToMany
     @Builder.Default
+    @ToString.Exclude
     Set<Documents> documents = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)

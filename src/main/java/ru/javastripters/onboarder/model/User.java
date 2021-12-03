@@ -47,6 +47,7 @@ public class User {
 
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
             @JsonBackReference
+    @ToString.Exclude
     Set<Project> projects;
 
     protected User() {}

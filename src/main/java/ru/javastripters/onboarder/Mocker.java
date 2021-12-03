@@ -27,63 +27,143 @@ public class Mocker implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        Department managers = new Department("Управление");
-        Department developers = new Department("Разработка");
+        Department frontend = new Department("Frontend");
+        Department backend = new Department("Backend");
+        Department design = new Department("Дизайн");
+        Department community = new Department("Связи с общественностью");
+        Department managment = new Department("Управление");
 
-        User m1 = User.builder()
-                .fullName("Вася Пупкин")
-                .profession("Менеджер")
+        User u1 = User.builder()
+                .fullName("Christian Cameron Clark")
+                .profession("Senior-разработчик")
                 .avatar("avatars/vasya.jpg")
                 .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
                 .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
-                .department(managers)
+                .department(frontend)
                 .build();
+        frontend.getWorkers().add(u1);
 
-        User m2 = User.builder()
-                .fullName("Rober Fox")
-                .profession("Старшие менеджер")
-                .avatar("avatars/arkasha.jpg")
-                .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
-                .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
-                .department(managers)
-                .build();
-
-        managers.getWorkers().addAll(List.of(m1, m2));
-
-        User dev = User.builder()
-                .fullName("Eleanor Pena")
-                .profession("Фулкек разработчик")
+        User u2 = User.builder()
+                .fullName("Ryan Miguel Walker")
+                .profession("Middle-разработчик")
                 .avatar("avatars/luda.jpg")
                 .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
                 .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
-                .department(developers)
+                .department(backend)
                 .build();
+        backend.getWorkers().add(u2);
 
-        developers.getWorkers().add(dev);
-
-        Project project = Project.builder()
-                .name("Крутой проект")
-                .description(" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida eget ipsum fermentum mollis. Donec eget erat est. Cras lacinia sit amet nisl id egestas. Curabitur dui purus, blandit eu leo eget, volutpat fringilla erat. Mauris nec ante elementum, consequat magna et, fermentum diam. Integer vestibulum mollis elit at dapibus. Curabitur efficitur arcu vitae velit bibendum placerat. ")
-                .users(List.of(m1, m2, dev))
-                .direction("Mobile")
-                .tags(List.of("Android", "Kotlin"))
+        User u3 = User.builder()
+                .fullName("Patrick Richard Bailey")
+                .profession("UI-дизайнер")
+                .avatar("avatars/patrick.png")
+                .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
+                .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
+                .department(design)
                 .build();
+        design.getWorkers().add(u3);
+
+        User u4 = User.builder()
+                .fullName("Aidan Adrian Walker")
+                .profession("Менеджер")
+                .avatar("avatars/aidan.png")
+                .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
+                .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
+                .department(managment)
+                .build();
+        managment.getWorkers().add(u4);
+
+        User u5 = User.builder()
+                .fullName("Eric Gavin Bryant")
+                .profession("Контент-менеджер")
+                .avatar("avatars/eric.png")
+                .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
+                .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
+                .department(community)
+                .build();
+        community.getWorkers().add(u5);
+
+        User u6 = User.builder()
+                .fullName("Lucas William Anderson")
+                .profession("Junior-разработчик")
+                .avatar("avatars/lucas.png")
+                .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
+                .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
+                .department(frontend)
+                .build();
+        frontend.getWorkers().add(u6);
+
+        User u7 = User.builder()
+                .fullName("Jack Mason King")
+                .profession("Middle-разработчик")
+                .avatar("avatars/jack.png")
+                .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
+                .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
+                .department(backend)
+                .build();
+        backend.getWorkers().add(u7);
+
+        User u8 = User.builder()
+                .fullName("Adrian Elijah Howard")
+                .profession("UI/UX-дизайнер")
+                .avatar("avatars/adrian.png")
+                .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
+                .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
+                .department(design)
+                .build();
+        design.getWorkers().add(u8);
+
+        User u9 = User.builder()
+                .fullName(" Isaiah Christopher Diaz")
+                .profession("Менеджер")
+                .avatar("avatars/isaiah.png")
+                .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
+                .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
+                .department(community)
+                .build();
+        community.getWorkers().add(u9);
+
+        User u10 = User.builder()
+                .fullName("Luke James Perry")
+                .profession("Стажер-разработчик")
+                .avatar("avatars/luke.png")
+                .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
+                .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
+                .department(frontend)
+                .build();
+        frontend.getWorkers().add(u10);
 
         Project project1 = Project.builder()
-                .name("Тоже крутой проект")
-                .description("Не такое длинное описание")
-                .users(List.of(dev))
+                .name("StayConnected")
+                .description("Данный проект ориентирован на разработку портала, который поспособствует объединению людей в единой среде с использованием компонентов, принятыми пользователями на опыте других, уже существующих приложений")
+                .users(List.of(u2, u3, u8, u9))
                 .direction("Web")
-                .tags(List.of("VueJS", "Java", "JS"))
+                .tags(List.of("JS", "Figma"))
                 .build();
 
-        projectRepo.saveAll(List.of(project, project1));
+        Project project2 = Project.builder()
+                .name("Quizzer!")
+                .description("Основная задача проекта заключается в разработке развлекательной Quiz-игры, которая поможет весело провести свободное время с близкими или друзьями")
+                .users(List.of(u1, u2, u4, u6, u8, u10))
+                .direction("Desktop")
+                .tags(List.of("C#", "GameDev", "Unity"))
+                .build();
+
+        Project project3 = Project.builder()
+                .name("Message&Convenience")
+                .description("Разработка мобильного мессенджера для поддержания контакта с людьми в приятном интерфейсе с практичным функционалом")
+                .users(List.of(u3, u5, u7, u10, u2))
+                .direction("Android-приложение")
+                .tags(List.of("Java", "WebSockets", "NoSQL"))
+                .build();
+
+        projectRepo.saveAll(List.of(project1, project2, project3));
 
         Diagram classDiagram = new Diagram(Diagram.Type.CLASS, "class.jpg", "# Диаграмма классов \n вот тут диаграмма");
-        classDiagram.setProject(project);
+        classDiagram.setProject(project1);
 
         Diagram deploymentDiagram = new Diagram(Diagram.Type.DEPLOYMENT, "deployment.jpg", "# Deployment-диаграмма \n и тут тоже");
-        deploymentDiagram.setProject(project);
+        deploymentDiagram.setProject(project1);
 
         diagramRepo.saveAll(List.of(classDiagram, deploymentDiagram));
     }

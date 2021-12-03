@@ -18,10 +18,12 @@ public class ProjectCardDto {
     public static class UserDTO {
         int id;
         String fullname;
+        String avatar;
 
         public UserDTO(User user) {
             id = user.getId();
             fullname = user.getFullName();
+            avatar = user.getAvatar();
         }
     }
 

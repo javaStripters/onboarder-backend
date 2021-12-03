@@ -1,6 +1,8 @@
 package ru.javastripters.onboarder.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ru.javastripters.onboarder.dto.AnswerDto;
 import ru.javastripters.onboarder.dto.QuestionDto;
 import ru.javastripters.onboarder.model.Answer;
@@ -88,7 +90,13 @@ public class StackOverslowService {
     }
 
     public List<Answer> setRightAnswer(int questionId, int answerId, int userId) {
-        List<Answer> answers = questionRepo.findById(questionId).getAnswers().stream().map(ans -> {
+        Question question = questionRepo.findById(questionId);
+        User user = userRepo.findUsersById(userId);
+
+        if (!question.getAuthor().equals(user))
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+
+        List<Answer> answers = question.getAnswers().stream().map(ans -> {
             ans.setRight(false);
             if (ans.getId() == answerId)
                 ans.setRight(true);

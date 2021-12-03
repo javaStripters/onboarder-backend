@@ -4,12 +4,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.javastripters.onboarder.dto.AnswerDto;
 import ru.javastripters.onboarder.dto.QuestionDto;
+import ru.javastripters.onboarder.model.Project;
 import ru.javastripters.onboarder.model.Question;
+import ru.javastripters.onboarder.model.User;
 import ru.javastripters.onboarder.repository.QuestionRepo;
+import ru.javastripters.onboarder.repository.UserRepo;
 import ru.javastripters.onboarder.service.StackOverslowService;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,10 +25,12 @@ public class StackOverslowController {
 
     private final StackOverslowService service;
     private final QuestionRepo questionRepo;
+    private final UserRepo userRepo;
 
-    public StackOverslowController(StackOverslowService service, QuestionRepo questionRepo) {
+    public StackOverslowController(StackOverslowService service, QuestionRepo questionRepo, UserRepo userRepo) {
         this.service = service;
         this.questionRepo = questionRepo;
+        this.userRepo = userRepo;
     }
 
     @PostMapping("questions")
@@ -34,12 +40,18 @@ public class StackOverslowController {
     }
 
     @GetMapping("questions")
-    public List<QuestionDto> getQuestions(@RequestParam(value = "sort", defaultValue = "NEW") Sorting sorting) {
+    public List<QuestionDto> getQuestions(
+            @RequestParam(value = "sort", defaultValue = "NEW") Sorting sorting,
+            @RequestHeader(value = "Authorization", defaultValue = "1") int userId
+    ) {
+        User user = userRepo.findUsersById(userId);
+        Set<Project> projects = user.getProjects();
+
         List<Question> questions = switch (sorting) {
-            case NEW -> questionRepo.findNew();
-            case ACTIVE -> questionRepo.findActive();
-            case NO_ANSWER -> questionRepo.findWithoutAnswer();
-            case SOLVED -> questionRepo.findSolved();
+            case NEW -> questionRepo.findNew(projects);
+            case ACTIVE -> questionRepo.findActive(projects);
+            case NO_ANSWER -> questionRepo.findWithoutAnswer(projects);
+            case SOLVED -> questionRepo.findSolved(projects);
         };
 
         return questions.stream().map(QuestionDto::new).collect(Collectors.toList());
