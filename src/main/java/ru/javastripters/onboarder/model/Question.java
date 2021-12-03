@@ -11,6 +11,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @Builder
+@AllArgsConstructor
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
