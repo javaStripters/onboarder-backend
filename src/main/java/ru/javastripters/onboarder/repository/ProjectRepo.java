@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface ProjectRepo extends CrudRepository<Project, Integer> {
     List<Project> findAll();
+    Project findById(int id);
 }

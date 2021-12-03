@@ -39,7 +39,7 @@ public class ProjectController {
 
     @GetMapping("{projectId}/users")
     public Map<String, List<User>> getUsers(@PathVariable int projectId) {
-        return projectRepo.findById(projectId).get().getUsers().stream().collect(Collectors.groupingBy(v -> v.getDepartment().getName()));
+        return projectRepo.findById(projectId).getUsers().stream().collect(Collectors.groupingBy(v -> v.getDepartment().getName()));
     }
 
     @PostMapping
@@ -55,7 +55,7 @@ public class ProjectController {
 
     @GetMapping("{projectId}")
     public Project getProject(@PathVariable int projectId) {
-        return projectRepo.findById(projectId).get();
+        return projectRepo.findById(projectId);
     }
 
     @GetMapping("{projectId}/goals")
@@ -70,8 +70,7 @@ public class ProjectController {
 
     @PostMapping("{projectId}/diagram")
     public Diagram addDiagram(@PathVariable int projectId, @RequestBody Diagram diagram) {
-        Project project = projectRepo.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project bot found"));
+        Project project = projectRepo.findById(projectId);
 
         diagram.setProject(project);
         return diagramRepo.save(diagram);
@@ -84,8 +83,7 @@ public class ProjectController {
 
     @PutMapping("{projectId}/diagram/{diagramId}")
     public Diagram updateDiagram(@PathVariable int projectId, @PathVariable int diagramId, @RequestBody Diagram diagram) {
-        Project project = projectRepo.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project bot found"));
+        Project project = projectRepo.findById(projectId);
 
         diagram.setId(diagramId);
         diagram.setProject(project);

@@ -72,15 +72,13 @@ public class ProjectService {
     }
 
     public String getGoals(int projectId) {
-        Project project = projectRepo.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+        Project project = projectRepo.findById(projectId);
 
         return project.getGoals();
     }
 
     public String setGoals(int projectId, String content) {
-        Project project = projectRepo.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+        Project project = projectRepo.findById(projectId);
 
         project.setGoals(content);
         projectRepo.save(project);
@@ -89,15 +87,13 @@ public class ProjectService {
     }
 
     public List<String> getInstruments(int projectId) {
-        Project project = projectRepo.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+        Project project = projectRepo.findById(projectId);
 
         return project.getInstruments();
     }
 
     public List<String> setInstruments(int projectId, List<String> instruments) {
-        Project project = projectRepo.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+        Project project = projectRepo.findById(projectId);
 
         project.setInstruments(instruments);
         projectRepo.save(project);

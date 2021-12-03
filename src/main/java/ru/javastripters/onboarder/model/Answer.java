@@ -2,7 +2,6 @@ package ru.javastripters.onboarder.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.Objects;
 @ToString
 @Builder
 @AllArgsConstructor
-public class Question {
+public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
@@ -25,41 +24,30 @@ public class Question {
     User author;
 
     @ManyToOne
-    Project project;
-
-    @Column(columnDefinition = "text")
-    String name;
+    Question question;
 
     @Column(columnDefinition = "text")
     String content;
 
-    @ElementCollection
-            @Builder.Default
-    List<String> tags = new ArrayList<>();
+    boolean isRight;
 
     @Builder.Default
     Date createdAt = new Date();
 
-    @OneToMany
-    @Builder.Default
-    List<Rating> ratings = new ArrayList<>();
+    protected Answer() {}
 
-    @OneToMany
-    @Builder.Default
-    List<Answer> answers = new ArrayList<>();
-
-    protected Question() {}
-
-    public int countRating() {
-        return ratings.stream().mapToInt(Rating::getVote).sum();
+    public Answer(User author, Question question, String content) {
+        this.author = author;
+        this.question = question;
+        this.content = content;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Question question = (Question) o;
-        return id != null && Objects.equals(id, question.id);
+        Answer answer = (Answer) o;
+        return id != null && Objects.equals(id, answer.id);
     }
 
     @Override
