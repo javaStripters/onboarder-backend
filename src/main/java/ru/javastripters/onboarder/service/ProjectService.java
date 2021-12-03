@@ -9,6 +9,7 @@ import ru.javastripters.onboarder.model.User;
 import ru.javastripters.onboarder.repository.ProjectRepo;
 import ru.javastripters.onboarder.repository.UserRepo;
 
+import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,5 +86,22 @@ public class ProjectService {
         projectRepo.save(project);
 
         return project.getGoals();
+    }
+
+    public List<String> getInstruments(int projectId) {
+        Project project = projectRepo.findById(projectId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+
+        return project.getInstruments();
+    }
+
+    public List<String> setInstruments(int projectId, List<String> instruments) {
+        Project project = projectRepo.findById(projectId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+
+        project.setInstruments(instruments);
+        projectRepo.save(project);
+
+        return project.getInstruments();
     }
 }

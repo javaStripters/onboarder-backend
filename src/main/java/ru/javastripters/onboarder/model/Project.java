@@ -1,7 +1,7 @@
 package ru.javastripters.onboarder.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.checkerframework.checker.units.qual.C;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -14,7 +14,8 @@ import java.util.*;
 @ToString
 @AllArgsConstructor
 public class Project {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     @Column(columnDefinition = "text")
@@ -32,26 +33,37 @@ public class Project {
     @Column(columnDefinition = "text")
     @Builder.Default
     String goals = """
-                   # Цели проекта\n\n
-                   # Задачи проекта\n\n
-                   # Описание проекта \n\n
-                   """;
-
-    @Column(columnDefinition = "text")
-    String instruments;
+            # Цели проекта\n\n
+            # Задачи проекта\n\n
+            # Описание проекта \n\n
+            """;
 
     @ElementCollection
-    List<String> diagramPaths = new ArrayList<>();
+    @Builder.Default
+    List<String> instruments = List.of(
+                "https://github.com/javaStripters/onboarder-backend",
+                "https://www.figma.com/file/5oLTHj6T8tINHN7xNfUnIU/Hacaton-training?node-id=245%3A8"
+            );
+
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+            @Builder.Default
+            @JsonManagedReference
+    List<Diagram> diagrams = new ArrayList<>();
 
     @OneToMany
+    @Builder.Default
     Set<Documents> documents = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable
     @ToString.Exclude
+    @Builder.Default
+            @JsonManagedReference
     List<User> users = new ArrayList<>();
 
-    protected Project() {}
+    protected Project() {
+    }
 
     public Project addUsers(Collection<User> users) {
         this.users.addAll(users);

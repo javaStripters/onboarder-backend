@@ -1,9 +1,11 @@
 package ru.javastripters.onboarder.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -21,6 +23,7 @@ public class Department {
 
     @OneToMany
     @ToString.Exclude
+            @JsonBackReference
     Set<User> workers;
 
     protected Department() {}

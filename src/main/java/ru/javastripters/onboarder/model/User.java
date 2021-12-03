@@ -1,5 +1,9 @@
 package ru.javastripters.onboarder.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -13,6 +17,8 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@Builder
+@AllArgsConstructor
 public class User {
     enum PrivilegeLevel {
         NEWBIE,
@@ -28,10 +34,19 @@ public class User {
 
     String profession;
 
+    String about;
+
+    @JsonRawValue
+    String contacts;
+
+    String avatar;
+
     @ManyToOne(cascade = CascadeType.ALL)
+            @JsonManagedReference
     Department department;
 
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+            @JsonBackReference
     Set<Project> projects;
 
     protected User() {}
