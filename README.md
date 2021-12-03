@@ -35,7 +35,7 @@
 Необходимо
 1. Клонировать репозиторий:
     ```shell
-   https://github.com/javaStripters/onboarder-backend && cd onboarder-backend
+   git clone https://github.com/javaStripters/onboarder-backend && cd onboarder-backend
    ```
 2. Запустить сервис:
     ```shell
