@@ -2,13 +2,10 @@ package ru.javastripters.onboarder;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import ru.javastripters.onboarder.model.Department;
-import ru.javastripters.onboarder.model.Diagram;
-import ru.javastripters.onboarder.model.Project;
-import ru.javastripters.onboarder.model.User;
+import ru.javastripters.onboarder.model.*;
 import ru.javastripters.onboarder.repository.DiagramRepo;
 import ru.javastripters.onboarder.repository.ProjectRepo;
+import ru.javastripters.onboarder.repository.QuestionRepo;
 import ru.javastripters.onboarder.repository.UserRepo;
 
 import java.util.List;
@@ -18,17 +15,18 @@ public class Mocker implements CommandLineRunner {
     private final UserRepo userRepo;
     private final ProjectRepo projectRepo;
     private final DiagramRepo diagramRepo;
+    private final QuestionRepo questionRepo;
 
-    public Mocker(ProjectRepo projectRepo, UserRepo userRepo, ProjectRepo projectRepo1, DiagramRepo diagramRepo) {
+    public Mocker(ProjectRepo projectRepo, UserRepo userRepo, ProjectRepo projectRepo1, DiagramRepo diagramRepo, QuestionRepo questionRepo) {
         this.userRepo = userRepo;
         this.projectRepo = projectRepo1;
         this.diagramRepo = diagramRepo;
+        this.questionRepo = questionRepo;
     }
 
 
     @Override
-    @Transactional
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Department managers = new Department("Управление");
         Department developers = new Department("Разработка");
 
@@ -88,7 +86,5 @@ public class Mocker implements CommandLineRunner {
         deploymentDiagram.setProject(project);
 
         diagramRepo.saveAll(List.of(classDiagram, deploymentDiagram));
-
-
     }
 }
