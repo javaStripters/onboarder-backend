@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.javastripters.onboarder.dto.MarkdownDTO;
 import ru.javastripters.onboarder.dto.ProjectCardDto;
-import ru.javastripters.onboarder.model.Department;
 import ru.javastripters.onboarder.model.Diagram;
 import ru.javastripters.onboarder.model.Project;
 import ru.javastripters.onboarder.model.User;

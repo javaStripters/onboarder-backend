@@ -55,7 +55,7 @@ public class Mocker implements CommandLineRunner {
         User dev = User.builder()
                 .fullName("Eleanor Pena")
                 .profession("Фулкек разработчик")
-                .avatar("avatar/luda.jpg")
+                .avatar("avatars/luda.jpg")
                 .about("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis lorem quis nisi mollis pretium. Proin accumsan tellus quis ante pharetra ornare quis iaculis tellus.")
                 .contacts("{\"phoneNumber\":\"8 (406) 555-0120\",\"telegramId\":\"@felicia\",\"emailAdress\":\"tim.jennings@example.com\",\"facebookId\":\"Robert_Fox\"}")
                 .department(developers)
