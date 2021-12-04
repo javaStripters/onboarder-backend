@@ -263,5 +263,32 @@ public class Mocker implements CommandLineRunner {
         question2 = questionRepo.save(question2);
         stackOverslowService.vote(question2.getId(), u5.getId(), false);
         stackOverslowService.vote(question2.getId(), u8.getId(), false);
+
+        Question question3 = Question.builder()
+                .project(project2)
+                .author(u6)
+                .name("Многопоточное vs асинхронное программирование")
+                .content("""
+                        Хотелось бы узнать разницу между этими подходами. Разве асинхронное программирование не подразумевает из себя уже многопоточность, ведь Task где-то там по любому выполняется в отдельном потоке ?
+                                                
+                        В каких случаях нужно прибегать к многопоточному, а в каких к асинхронному программированию ?
+                                                
+                        И еще ко всему этому есть параллельное программирование, которая тоже вносит путаницу для меня. В чем её отличие ?
+                        """)
+                .tags(List.of("C#", "concurrency"))
+                .build();
+
+        question3 = questionRepo.save(question3);
+
+        Question question4 = Question.builder()
+                .project(project1)
+                .author(u9)
+                .name("На какие уязвимости, помимо SQL-инъекций и XSS, стоит проверить сайт?")
+                .content("""
+                        Давно не интересовался методами взлома, так что солидно отстал от жизни. Кто с чем сталкивался?
+                        """)
+                .build();
+
+        question4 = questionRepo.save(question4);
     }
 }
