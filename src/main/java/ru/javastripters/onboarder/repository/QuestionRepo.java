@@ -26,7 +26,7 @@ public interface QuestionRepo extends CrudRepository<Question, Integer> {
 
     @Query(value = "select * from question " +
             "inner join answer a on question.id = a.question_id " +
-            "where a.is_right" +
+            "where a.is_right " +
             "and project_id in ?1", nativeQuery = true)
     List<Question> findSolved(Collection<Project> projects);
 
