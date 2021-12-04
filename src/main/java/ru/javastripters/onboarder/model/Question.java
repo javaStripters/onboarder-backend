@@ -2,6 +2,8 @@ package ru.javastripters.onboarder.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -40,12 +42,16 @@ public class Question {
     @Builder.Default
     Date createdAt = new Date();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @Builder.Default
+    @ToString.Exclude
     List<Rating> ratings = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @Builder.Default
+    @ToString.Exclude
     List<Answer> answers = new ArrayList<>();
 
     protected Question() {}
